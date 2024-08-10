@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     margin: 0;
 }
@@ -116,3 +117,123 @@ button:hover {
 
 
 
+=======
+body {
+    margin: 0;
+}
+
+.logo-img {
+    height: 18px;
+    margin-right: 300px;
+    margin-left: -300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.nav-element {
+    margin-left: 150px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    justify-content: space-around;
+    display: flex;
+} 
+
+hr {
+    margin-top: -2px;
+}
+
+span {
+    margin-right: 45px;
+    font-size: 23px;
+}
+a {
+    color: #666666 !important; 
+    text-decoration: none;
+} 
+a:visited {
+    color: #387ed1;
+}
+a:hover {
+    color: #387ed1;
+}
+
+
+div {
+    display: inline-block;
+    
+}
+
+
+.nav-section {
+    display: inline-flex;
+    margin-left: 400px;
+}
+.landing-page {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+} 
+
+h1 {
+    font-size: 50px;
+}
+
+
+.button {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    cursor: pointer;
+    background-color: #387ed1;
+    margin-top: 50px;
+    size: 50px;
+    height: 40px;
+    width: 175px;
+    margin-bottom: 100px;
+    font-size: 25px;
+    border: 1px solid rgba(0, 0, 0, 0) !important;
+    border-radius: 3px;
+    text-decoration: none;
+} 
+
+button:visited {
+    color: white !important;
+
+}
+button:hover {
+    background-color: black;
+}
+
+
+
+.nav-bar {
+    display: grid;
+} 
+
+.ecosystem {
+    display: flex;
+    align-items: center;
+}
+
+.ecosystem-para {
+    /* flex-wrap: wrap; */
+    padding-left: 50px;
+}
+
+.ecosystem img {
+    height: 500px;
+    width: 500px;
+    padding-left: 200px;
+} 
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 063c4ea5dfba295ec61257b70a671883507cc955
