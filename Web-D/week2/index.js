@@ -1,11 +1,8 @@
-const fs =  require("fs");
 
-function print(err, data) {
-    console.log(data);
-} 
+console.log("Hi!");
 
-fs.readFile("a.txt", "hex", print);
+setTimeout(function timeout() {
+    console.log("Click the button!");
+}, 15000);
 
-fs.readFile("a.txt", "hex", print);
-
-setTimeout(() =>)
+console.log("Welcome to loupe."); 
