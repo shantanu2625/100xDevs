@@ -1,7 +1,12 @@
-function setTimeoutPromisified(ms) {
-    return new Promise(resolve => setTimeout(resolve,ms));
+function random(resovle) {
+    setTimeout(resovle,4000);
+}
+
+
+
+const p = new Promise(random);
+
+function callback() {
+    console.log("promise succeeded")
 } 
-function callBack() {
-    console.log("3 seconds have passed!")
-} 
-setTimeoutPromisified(3000).then(callBack)
+p.then(callback)
