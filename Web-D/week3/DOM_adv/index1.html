@@ -1,52 +1,51 @@
-<body>
-    <input type="text"></input>
-    <button onclick="addTodo()">Add todo!</button>
-    <button onclick="deleteLastTodo()">Add todo!</button>
+<body></body>
+  <input type="text"></input>
+  <button onclick="addTodo()">Add todo!</button>
 
-    <button onclick="deleteLastTodo()">Add todo!</button>
-    <div id="todos"></div>
-    <script>
-      let todos = [];
-      function addTodo() {
-        todos.push({
-          title: document.querySelector("input").value 
-        })
-        render()
-      } 
+  <button onclick="deleteLastTodo()">Delete last todo</button>
 
-      function deleteLastTodo() {
-        todos.splice(todos.length - 1, 1) // remove the last element from the arr 
-        render();
+  <button onclick="deleteFirstTodo()">Delete first todo</button>
+  <div id="todos"></div>
+  <script>
+    let todos = [];
+    function addTodo() {
+      todos.push({
+        title: document.querySelector("input").value
+      })
+      render()
+    }
+
+    function deleteLastTodo() {
+      todos.splice(todos.length - 1, 1) // remove the last element from the arr
+      render()
+    }
+
+
+    function deleteFirstTodo() {
+      todos.splice(0, 1) // remove the last element from the arr
+      render()
+    }
+
+
+    function createTodoComponent(todo) {
+      const div = document.createElement("div");
+      const h1 = document.createElement("h1");
+      const button = document.createElement("button");
+      button.innerHTML = "Delete"
+      h1.innerHTML = todo.title;
+      div.append(h1)
+      div.append(button)
+      return div
+    }
+
+    // react 
+    function render() {
+      document.querySelector("#todos").innerHTML = "";
+      for (let i = 0; i < todos.length; i++) {
+        const element = createTodoComponent(todos[i]);
+        document.querySelector("#todos").appendChild(element)
       }
+    }
 
-      function deleteLastTodo() {
-        todos.splice(0, 1) // remove the last element from the arr 
-        render();
-      }
-
-
-
-
-
-
-      function createTodoComponent(todo) {
-        const div = document.createElement("div");
-        const h1 = document.createElement("h1");
-        const button = document.createElement("button");
-        button.innerHTML = "Delete";
-        h1.innerHTML = todo.title;
-        div.append(h1);
-        div.append(button);
-        return div;
-      }
-        // this ungly syntax will be a peice of cake in react don't give up on your dream to become the best version of yourself as a remote software developer 
-      function render() { 
-        document.querySelector("#todo").innerHTML = "";
-        for (let i = 0; i < todos.length; i++) {
-          const element = createTodoComponent(todos[i]);
-          document.querySelector("#todos").appendChild(div)
-        }
-        
-      }
-    </script>
-  </body>
+  </script>
+</body>
