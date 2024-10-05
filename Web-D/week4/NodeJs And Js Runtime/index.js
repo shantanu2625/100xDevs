@@ -8,7 +8,7 @@ program
     .description('writing a cli to do some string utilites like counting the no. of words in a passed argument')
     .version('0.8.0'); 
 
-program.command('counter')
+program.command('count')
     .description("count number of lines a file")
     .argument('<file>','file to count')
     .action((file)=> {
@@ -18,7 +18,7 @@ program.command('counter')
             } else {
                 const lines = data.split('\n').length;
             } 
-            console.log(`There are ${lines} lines in ${file} `)
+            console.log(`There are ${lines} lines in ${file} `);
         });
     });
      
