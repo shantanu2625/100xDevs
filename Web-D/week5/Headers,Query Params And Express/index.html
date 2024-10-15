@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
 </head>
 <body>
     <h2>
-        Hello World
+        LinkedIn
     </h2> 
-    <script src="index.js"></script>
+    <div id="posts">
+
+    </div> 
+    <button onclick="getRecentPost()">Fetch Latest Posts</button>
+    <script> 
+        async function getRecentPost() {
+            const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
+            const arr = response.data;
+            for (let i = 0; i < arr.length; i++) {
+            document.getElementById("posts").innerHTML += ("<div>" +  arr[i].body + "</div>");
+
+            }
+        }
+        getRecentPost();
+    </script>
 </body>
 </html>
