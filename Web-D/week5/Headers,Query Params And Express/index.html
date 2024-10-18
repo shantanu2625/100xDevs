@@ -20,11 +20,10 @@
             const response = await axios.get("https://jsonplaceholder.typicode.com/posts");
             const arr = response.data;
             for (let i = 0; i < arr.length; i++) {
-            document.getElementById("posts").innerHTML += ("<div>" +  JSON.stringify([i]) + "</div>");
+            document.getElementById("posts").innerHTML += ("<div>" +  arr[i].body + "</div>");
 
             }
         }
-        getRecentPost();
     </script>
 </body>
 </html>
