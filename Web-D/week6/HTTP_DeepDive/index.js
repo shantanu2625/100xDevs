@@ -37,21 +37,18 @@ app.post('/signin', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    const user = users.find(user => user.username === username && user.password === password); 
+    let foundUser = null; 
 
-    if (user) {
-        const token = generateToken;
-        user.token = token;
-        res.send({
-            token
-        }) 
-        console.log(users);
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].username == username && users[i].password == password) {
+            foundUser = users[i];
+        }
+    } 
 
-    } else {
-        res.status(403).send({
-            message: "Invalid username or password"
-        })
+    if (foundUser) {
+        const token = generateToken();
     }
+    
 }) 
 
 app.listen(3000);
