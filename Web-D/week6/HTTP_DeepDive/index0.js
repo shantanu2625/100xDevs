@@ -58,7 +58,7 @@ app.get('/me', (req, res)=> {
     let foundUser  = null;
 
     for (let i = 0; i < users.length; i ++) {
-        if (users[i].uername == uername) {
+        if (users[i].username == username) {
             foundUser = users[i];
         } 
     } 
