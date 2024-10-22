@@ -44,8 +44,14 @@ app.post('/signin', (req, res)=>{
 
 }) 
 
-app.get('/me', (req, res)=>{
+app.get('/me', (req, res)=>{    
+    const token = req.headers.token; 
 
+    const decodeData = jwt.verify(token, JWT_SECRET); 
+
+    if (decodeData.username) {
+        
+    }
 }) 
 
 app.listen(3000);
