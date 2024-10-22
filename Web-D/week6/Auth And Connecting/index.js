@@ -50,8 +50,39 @@ app.get('/me', (req, res)=>{
     const decodeData = jwt.verify(token, JWT_SECRET); 
 
     if (decodeData.username) {
-        
+        let foundUser = null;
+
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].username === decodeData.username) {
+                foundUser = users[i];
+            }
+        } 
+
+        res.json({
+            username: foundUser.username,
+            password: foundUser.password
+        })
+    } else {
+        res.json({
+            message: "You are not logged in"
+        })
     }
+    
+    
+})  
+
+app.get('/todo', auth, (req, res)=> {
+
 }) 
+
+app.post('/todo', auth, (req, req)=> {
+
+}) 
+
+app.delete('/todo', auth, (req, req)=> {
+
+}) 
+
+
 
 app.listen(3000);
