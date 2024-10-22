@@ -42,9 +42,26 @@ app.post('/signin', (req, res)=>{
         })
     }
 
-}) 
+})   
 
-app.get('/me', (req, res)=>{    
+function logger(req, res, next) {
+    console.log(`${req.method} request came `)
+}
+
+function auth(req, res, next) {
+    const token = req.headers.token;
+    const decodeData = jwt.verify(token, JWT_SECRET);
+    if (decodeData.username) {
+        req.username = decodeData.username;
+        next();
+    } else {
+        res.json({
+            message: "You are not logged in"
+        })
+    }
+}
+ 
+app.get('/me', auth,  (req, res)=>{    
     const token = req.headers.token; 
 
     const decodeData = jwt.verify(token, JWT_SECRET); 
@@ -53,7 +70,7 @@ app.get('/me', (req, res)=>{
         let foundUser = null;
 
         for (let i = 0; i < users.length; i++) {
-            if (users[i].username === decodeData.username) {
+            if (users[i].username === req.username) {
                 foundUser = users[i];
             }
         } 
@@ -75,11 +92,11 @@ app.get('/todo', auth, (req, res)=> {
 
 }) 
 
-app.post('/todo', auth, (req, req)=> {
+app.post('/todo', auth, (req, res)=> {
 
 }) 
 
-app.delete('/todo', auth, (req, req)=> {
+app.delete('/todo', auth, (req, res)=> {
 
 }) 
 
