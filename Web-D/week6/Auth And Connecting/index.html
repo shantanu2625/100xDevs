@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auth Website</title> 
-    <link rel="stylesheet" href="styles.css">
 </head> 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script> 
+<script>
+    async function signup() { 
+        const username = document.getElementById("signup-username").value; 
+        const password = document.getElementById("signup-password").value; 
+
+        await axios.post("http://localhost:3000/signup" , {
+            username: username,
+            password: password 
+        }); 
+        alert("Signup Succesfully!");
+
+    } 
+    
+    async function signin() {
+        const username = getElementById("signin-username").value;
+        const password = getElementById("signup-password").value; 
+
+        const response = await axios.post("http://localhost:3000/signin", {
+            username: username,
+            pa
+        }); ssword: password
+
+        localStorage.setItem("token" , response.data.token);
+
+        alert("Sigin Succesfully");
+    } 
+
+    async function getUserInformation() {
+        axios.get("http://localhost:3000/me" , {
+            headers: {
+                token: localStorage.getItem("token")
+            }
+        })
+    } 
+
+    getUserInformation();
+
+</script>
 <body>
     <div>
         Signup 
@@ -17,9 +54,9 @@
     </div> 
     <div>
         Signin 
-        <input type="text" name="username" placeholder="username" />
-        <input type="password" name="password" placeholder="password" />
-        <button onclick="signin()">Signin</button> 
+        <input id="signin-username" type="text" name="username" placeholder="username" />
+        <input id="signin-password" type="password" name="password" placeholder="password" />
+        <button onclick="signin()">Submit</button> 
     </div> 
     <div>
         User Information 
@@ -29,17 +66,5 @@
         <button onclick="logout()">Logout</button>
     </div>
 </body> 
-<script>
-    async function signup() {
-        const username = document.getElementById("signup-username").value; 
-        const password = document.getElementById("signup-password").value; 
 
-        await axios.post("https://localhost:3000/signup" , {
-            username: username,
-            password: password 
-        }) 
-
-        alert("Signup Succesfully!")
-    }
-</script>
 </html>

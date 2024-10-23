@@ -1,13 +1,19 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); 
 const JWT_SECRET = "shan123"
 const app = express();
 
 const users = [];
 
-app.use(express.json());
+function logger(req, res, next) {
+    console.log(`${req.method} request came`);
+    next();
+}
+app.use(express.json()); 
 
-app.post('/signup', (req, res)=>{
+
+
+app.post('/signup', logger, (req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
     
@@ -22,7 +28,7 @@ app.post('/signup', (req, res)=>{
 
 }) 
 
-app.post('/signin', (req, res)=>{
+app.post('/signin', logger,  (req, res)=>{
     const username = req.body.username;
     const password = req.body.password;
 
@@ -44,6 +50,9 @@ app.post('/signin', (req, res)=>{
 
 })   
 
+app.get('/' , (req, res)=> {
+    res.sendFile(__dirname + "/index.html");
+})
 
 function auth(req, res, next) {
     const token = req.headers.token;
@@ -58,7 +67,7 @@ function auth(req, res, next) {
     }
 }
  
-app.get('/me', auth,  (req, res)=>{    
+app.get('/me',  logger ,auth,  (req, res)=>{     
     const token = req.headers.token; 
 
     const decodeData = jwt.verify(token, JWT_SECRET); 
