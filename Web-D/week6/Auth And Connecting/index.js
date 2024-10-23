@@ -44,9 +44,6 @@ app.post('/signin', (req, res)=>{
 
 })   
 
-function logger(req, res, next) {
-    console.log(`${req.method} request came `)
-}
 
 function auth(req, res, next) {
     const token = req.headers.token;
