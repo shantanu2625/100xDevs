@@ -34,11 +34,12 @@
     } 
 
     async function getUserInformation() {
-        axios.get("http://localhost:3000/me" , {
+        const response = await axios.get("http://localhost:3000/me" , {
             headers: {
                 token: localStorage.getItem("token")
             }
-        })
+        }) 
+        document.getElementById("information").innerHTML = "Username: " + response.data.username + "Password: " + response.data.password; 
     } 
 
     getUserInformation();
