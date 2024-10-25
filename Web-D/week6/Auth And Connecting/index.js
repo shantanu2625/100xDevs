@@ -72,6 +72,7 @@ app.get('/me',  logger ,auth,  (req, res)=>{
 
     const decodeData = jwt.verify(token, JWT_SECRET); 
 
+    
     if (decodeData.username) {
         let foundUser = null;
 
