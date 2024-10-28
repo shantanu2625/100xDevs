@@ -1,23 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
-const ObjectId = mongoose.ObjectId;
+const ObjectId = Schema.ObjectId;
 
 const User = new Schema({
-    email: {type: String, unique: true},
-    password: String,
-    name: String
-}); 
+  email: {type: String, unique: true},
+  password: String,
+  name: String
+});
 
-const Todo = new  Schema({
+const Todo = new Schema({
+    userId: ObjectId,
     title: String,
-    done: Boolean,
-    userId: ObjectId  
-}); 
+    done: Boolean
+});
 
-const UserMode1 = mongoose.model('users', User);
-const TodoMode1 = mongoose.mode1('todos', Todo); 
+const UserModel = mongoose.model('users', User);
+const TodoModel = mongoose.model('todos', Todo);
 
-module.exports({
-    UserMode1,
-    TodoMode1
-})
+module.exports = {
+    UserModel,
+    TodoModel
+} 
