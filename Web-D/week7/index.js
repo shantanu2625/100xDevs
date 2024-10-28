@@ -1,9 +1,17 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
+const {UserMode1, TodoMode1} = require("./db");
 const app = express();
 
-app.post('/signup', function(req, res){
+app.post('/signup', async function(req, res){ 
+    const email = req.body.email;
+    const password = req.body.password;
+    const name = req.body.name;
+
+    await UserMode1.insert({
+        email: email,
+        password: password,
+        name: name
+    }) 
 
 })
 
