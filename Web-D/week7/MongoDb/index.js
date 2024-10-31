@@ -2,6 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const { UserModel, TodoModel } = require("./db");
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 const JWT_SECRET = "shanshan123tantan";
 mongoose.connect(
   "mongodb+srv://shantanubangar1:7rvKVWEWOUJGJ8lz@cluster0.wi1xv.mongodb.net/todo-shan"
@@ -13,11 +14,14 @@ app.use(express.json());
 app.post("/signup", async function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
-  const name = req.body.name;
+  const name = req.body.name; 
+
+  const hashP = await bcrypt.hash(password, 10);
+  console.log(hashP);
 
    await UserModel.create({
     email: email,
-    password: password,
+    password: hashP,
     name: name,
   });
 
@@ -30,28 +34,37 @@ app.post("/signin", async function (req, res) {
   const email = req.body.email;
   const password = req.body.password;
 
-  const user = await UserModel.findOne({
+  const response = await UserModel.findOne({
     email: email,
-    password: password,
-  });
+  }); 
 
-  console.log(user);
+  if (!response) {
+    res.status(403).json({
+      message: "user does not exist in our database"
+    }) 
+    return;
+  }
 
-  if (user) { 
-    console.log({
-        id: user._id.toString()
-    })
-    const token = jwt.sign({
-      id: user._id.toString()
-    }, JWT_SECRET);
+  const passwordMatch = bcrypt.compare(password, response.password);
+
+  if (passwordMatch) {
+    const token = jwt.sign(
+    {
+      id: response._id.toString()
+    }, JWT_SECRET
+    ) ;
     res.json({
-      token: token,
-    });
+      token
+    })
+
   } else {
     res.status(403).json({
-      message: "Incorrect Credentials",
+      message: "Inavlid Credentials"
     });
-  }
+  };
+  
+
+  
 });
 app.post("/todo", auth, function (req, res) {
     const userId = req.userId;  
