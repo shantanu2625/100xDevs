@@ -16,30 +16,20 @@ app.post("/signup", async function (req, res) {
   const password = req.body.password;
   const name = req.body.name; 
 
-  let ErrowThrown = false;
+  const hashP = await bcrypt.hash(password, 10);
+  console.log(hashP);
+  
+  await UserModel.create({
+    email: email,
+    password: hashP,
+    name: name
+  }); 
+  
+  res.json({
+    message: "You are signed up"
+  }); 
 
-  try {
-    const hashP = await bcrypt.hash(password, 10);
-    console.log(hashP);
-
-    await UserModel.create({
-      email: email,
-      password: hashP,
-      name: name,
-    }); 
-  } catch (e) {
-      console.log("Error while putting in the Database");
-      res.json({
-        message: "User already exist"
-      });
-      ErrowThrown = true;
-  }
-
-  if (!ErrowThrown) {
-    res.json({
-      message: "You are signed up",
-    }); 
-  }
+  
 });
 
 app.post("/signin", async function (req, res) {
