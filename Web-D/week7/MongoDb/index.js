@@ -12,12 +12,13 @@ const app = express();
 app.use(express.json());
 
 app.post("/signup", async function (req, res) {
+  // lets do here some input validation
   const email = req.body.email;
   const password = req.body.password;
   const name = req.body.name; 
 
+  
   const hashP = await bcrypt.hash(password, 10);
-  console.log(hashP);
   
   await UserModel.create({
     email: email,
