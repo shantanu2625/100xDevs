@@ -3,7 +3,9 @@ const jwt = require("jsonwebtoken");
 const { UserModel, TodoModel } = require("./db");
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
+const { z } =  require("zod");
 const JWT_SECRET = "shanshan123tantan";
+
 mongoose.connect(
   "mongodb+srv://shantanubangar1:7rvKVWEWOUJGJ8lz@cluster0.wi1xv.mongodb.net/todo-shan"
 );
@@ -13,11 +15,20 @@ app.use(express.json());
 
 app.post("/signup", async function (req, res) {
   // lets do here some input validation
+  const requiredBody = z.object({
+    email: z.string(),
+    password: z.string(),
+    name: z.string()
+  });
+
+  const parsedData = requiredBody.parse(req.body);
+  const parsedDataWithSuccess = requiredBody.safeParse(req.body);
+  
+
   const email = req.body.email;
   const password = req.body.password;
   const name = req.body.name; 
 
-  
   const hashP = await bcrypt.hash(password, 10);
   
   await UserModel.create({
