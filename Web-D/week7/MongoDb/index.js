@@ -16,14 +16,23 @@ app.use(express.json());
 app.post("/signup", async function (req, res) {
   // lets do here some input validation
   const requiredBody = z.object({
-    email: z.string(),
-    password: z.string(),
-    name: z.string()
+    email: z.string().min(3).max(30).email(),
+    password: z.string().min(3).max(30),
+    name: z.string().min(3).max(30)
   });
 
   // const parsedData = requiredBody.parse(req.body);
-  const parsedDataWithSuccess = requiredBody.safeParse(req.body); 
-  
+  const parsedDataWithSuccess = requiredBody.safeParse(req.body);  
+
+  if (!parsedDataWithSuccess.success) {
+    res.json({
+      message: "Incorrect Format"
+      
+      
+    }) 
+    return 
+  } 
+
   
 
   const email = req.body.email;
