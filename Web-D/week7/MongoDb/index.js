@@ -21,8 +21,9 @@ app.post("/signup", async function (req, res) {
     name: z.string()
   });
 
-  const parsedData = requiredBody.parse(req.body);
-  const parsedDataWithSuccess = requiredBody.safeParse(req.body);
+  // const parsedData = requiredBody.parse(req.body);
+  const parsedDataWithSuccess = requiredBody.safeParse(req.body); 
+  
   
 
   const email = req.body.email;
