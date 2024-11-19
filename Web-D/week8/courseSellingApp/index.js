@@ -2,21 +2,12 @@ const jwt = require('jsonwebtoken');
 const express = require('express'); 
 const mongoose = require('mongoose'); 
 const bcrypt = require('bcrypt');
+const { createUserRoutes } = require("./routes/user"); 
+const { createCourseRoutes } = require('./routes/course');
 const app = express();
 
- 
+createUserRoutes(app);
 
-app.post('/course/purchase', function(req, res){
-    res.json({
-        message: "Purchase Endpoint"
-    })
-})
-
-app.get('courses', function(req, res){
-    res.json({
-        message: "Courses Endpoint"
-    })
-})
-
+createCourseRoutes(app);
 
 app.listen(3000);
