@@ -1,5 +1,6 @@
 const express = require('express'); 
 const mongoose = require('mongoose');
+
 const { userRouter } = require("./routes/user"); 
 const { courseRouter } = require("./routes/course");
 const { adminRouter } = require("./routes/admin");
@@ -9,6 +10,6 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/admin', adminRouter)
 app.use('/api/v1/course', courseRouter);
 
-
+await mongoose.connect("mongodb+srv://shantanubangar1:7rvKVWEWOUJGJ8lz@cluster0.wi1xv.mongodb.net/coursera-app");
 app.listen(3000);
 
