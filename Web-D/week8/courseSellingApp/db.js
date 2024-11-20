@@ -4,21 +4,21 @@ mongoose.connect("mongodb+srv://shantanubangar1:7rvKVWEWOUJGJ8lz@cluster0.wi1xv.
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
 
-const userSchema = Schema({
+const userSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     firstName: String,
     lastName: String
 }) 
 
-const adminSchema = Schema({
+const adminSchema = new Schema({
     email: {type: String, unique: true},
     password: String,
     firstName: String,
     lastName: String 
 }) 
 
-const courseSchema = Schema({
+const courseSchema = new Schema({
     title: String,
     discription: String,
     price: Number,
@@ -26,7 +26,7 @@ const courseSchema = Schema({
     creatorID: ObjectId
 }) 
 
-const purchaseSchema = Schema({
+const purchaseSchema = new Schema({
     userId: ObjectId,
     courseId: ObjectId,
 
