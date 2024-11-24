@@ -16,7 +16,7 @@ adminRouter.post("/signin", function(req, res){
     })
 }) 
 
-adminRouter.post("/", function(req, res){
+adminRouter.post("/course", function(req, res){
     res.json({
         message: "Course Endpoint"
     })
