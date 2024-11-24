@@ -22,13 +22,13 @@ adminRouter.post("/", function(req, res){
     })
 }) 
 
-adminRouter.put("/", function(req, res){
+adminRouter.put("/course", function(req, res){
     res.json({
         message: "Course Endpoint"
     })
 }) 
 
-adminRouter.get("/bulk", function(req, res){
+adminRouter.get("/course/bulk", function(req, res){
     res.json({
         message: "Course Endpoint"
     })
