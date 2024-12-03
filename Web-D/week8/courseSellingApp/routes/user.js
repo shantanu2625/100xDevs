@@ -27,6 +27,12 @@ userRouter.post('/signup', async (req, res)=>{
 }) 
 
 userRouter.post('/signin', function(req, res){
+    const { email, password } = req.body;
+
+    const user = userModel.find({
+        email: email,
+        password: password
+    })
     res.json({
         message: "Signin Endpoint"
     })
