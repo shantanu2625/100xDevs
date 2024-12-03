@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const { userModel } = require("../db");
 const jwt = require("jsonwebtoken")
+const JWT_USER_PASSWORD = "shan123123"
 const userRouter = Router();
 const { z } = require("zod");
 
@@ -33,7 +34,14 @@ userRouter.post('/signin', async function(req, res){
     const user = await userModel.find({
         email: email,
         password: password
-    })
+    }) 
+
+    if (user) {
+        jwt.sign({
+            user:user._id
+        })
+    }
+    
     res.json({
         message: "Signin Endpoint"
     })
