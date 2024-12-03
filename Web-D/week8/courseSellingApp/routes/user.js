@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const { userModel } = require("../db")
+const { userModel } = require("../db");
+const jwt = require("jsonwebtoken")
 const userRouter = Router();
 const { z } = require("zod");
 
@@ -26,10 +27,10 @@ userRouter.post('/signup', async (req, res)=>{
     })
 }) 
 
-userRouter.post('/signin', function(req, res){
+userRouter.post('/signin', async function(req, res){
     const { email, password } = req.body;
 
-    const user = userModel.find({
+    const user = await userModel.find({
         email: email,
         password: password
     })
