@@ -2,7 +2,7 @@ const { Router } = require("express");
 const adminRouter = Router();
 const { adminModel, userModel } =  require("../db") 
 const jwt = require("")
-const JWT_ADMIN_PASSWORD = "shanadminpassword";
+const {JWT_ADMIN_PASSWORD} = require("../config"); 
 
 
 adminRouter.post("/signup", async function(req, res){
