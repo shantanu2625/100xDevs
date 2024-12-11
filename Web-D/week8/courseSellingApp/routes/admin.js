@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const adminRouter = Router();
-const { adminModel, userModel } =  require("../db")
+const { adminModel, userModel } =  require("../db") 
+const jwt = require("")
+const JWT_ADMIN_PASSWORD = "shanadminpassword";
 
 
 adminRouter.post("/signup", async function(req, res){
@@ -22,15 +24,15 @@ adminRouter.post("/signup", async function(req, res){
 adminRouter.post("/signin", async function(req, res){
     const { email, password } = req.body;
 
-    const user = await userModel.findOne({
+    const admin = await adminModel.findOne({
         email: email,
         password: password
     });
 
-    if (user) {
+    if (admin) {
         const token  = jwt.sign({
             id: user._id
-        }, JWT_USER_PASSWORD); 
+        }, JWT_ADMIN_PASSWORD); 
 
         res.json({
           token: token
