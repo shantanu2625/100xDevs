@@ -20,10 +20,3 @@ async function main() {
 }
  
 main();
-
-
-
-
-
-
-
