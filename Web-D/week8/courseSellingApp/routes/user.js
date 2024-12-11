@@ -32,9 +32,9 @@ userRouter.post('/signin', async function(req, res){
     const { email, password } = req.body;
 
     //TODO: ideally password should be hashed, and hence you cant compare the user provided password and the database password
-    
 
-    const user = await userModel.find({
+
+    const user = await userModel.findOne({
         email: email,
         password: password
     }) 
