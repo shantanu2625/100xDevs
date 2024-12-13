@@ -3,6 +3,7 @@ const adminRouter = Router();
 const { adminModel, userModel } =  require("../db") 
 const jwt = require("")
 const {JWT_ADMIN_PASSWORD} = require("../config"); 
+const {adminMiddleware} = require("../middleware/admin");
 
 
 adminRouter.post("/signup", async function(req, res){
@@ -44,7 +45,7 @@ adminRouter.post("/signin", async function(req, res){
     }
 }) 
 
-adminRouter.post("/course", function(req, res){
+adminRouter.post("/course", adminMiddleware, async function(req, res){
     res.json({
         message: "Course Endpoint"
     })
