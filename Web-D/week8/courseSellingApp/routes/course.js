@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const { userMiddleware } = require("../middleware/user");
 const courseRouter = Router(); 
-const { purchaseModel } = require("../db");
+const { purchaseModel, courseModel } = require("../db");
 
 
 courseRouter.post('/purchase', userMiddleware, async function(req, res){ 
@@ -15,13 +15,16 @@ courseRouter.post('/purchase', userMiddleware, async function(req, res){
     )
     
     res.json({
-    message: "Course Purchase Endpoint"
+    message: "You have succesfully bought the course"
     })
 })
 
-courseRouter.get('/preview', function(req, res){
+courseRouter.get('/preview', async function(req, res){ 
+
+    const course = await courseModel.find({})
+
     res.json({
-    message: "Courses Preview Endpoint"
+            course
     })
 })
 
