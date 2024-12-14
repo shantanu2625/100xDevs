@@ -57,6 +57,8 @@ userRouter.post('/signin', async function(req, res){
 })   
 
 userRouter.get('/purchases', function(req, res){
+    
+
     res.json({
         message: "Purchases Endpoint"
     })
